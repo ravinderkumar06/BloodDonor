@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- Meta tag for responsive design to make sure the page adjusts to the width of the device -->
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Title for the page, set dynamically using @ViewBag.Title in ASP.NET MVC -->
+    <title>@ViewBag.Title</title>
+
+    <!-- Bootstrap JS (JavaScript file for Bootstrap functionality) -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Bootstrap CSS (Styles for Bootstrap components) -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <style>
+        /* Custom styles */
+
+        /* Background styling for the body */
+        body {
+            background-image: url("/Images/bloodBgImag.jpg"); /* Sets the background image */
+            overflow: auto; /* Allows scrolling if content overflows */
+            margin: 0; /* Removes any default margin */
+            padding: 0; /* Removes any default padding */
+            height: 100%; /* Ensures the body takes up the full height */
+            background-repeat: space; /* Specifies that the background image will not repeat */
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: rgb(0,0,0,0.8); /* Semi-transparent black background */
+            text-align: center; /* Centers the text inside the footer */
+            padding: 0; /* Removes padding from the footer */
+            color: white; /* Sets the text color to white */
+        }
+
+       
+
+    </style>
+</head>
+<body>
+    <!-- A flexible container for the page content that takes up at least the full height of the viewport -->
+    <div class="d-flex flex-column min-vh-100">
+
+        <!-- Header section containing the navigation bar -->
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex flex-row justify-content-between align-items-center">
+                <!-- navbar-expand-lg shows all the items inline -->
+                <!-- Navbar container -->
+                <div>
+                    <!-- Navbar items (links) -->
+                    <ul class="navbar-nav">
+                        <!-- Home link -->
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" asp-action="AdminHomePage" asp-controller="Admin">
+                                Home
+                            </a>
+                        </li>
+
+                        <!-- Details link -->
+                        <li class="nav-item">
+                            <a class="nav-link active" asp-controller="Admin" asp-action="Details">Details</a>
+                        </li>
+
+                        <!-- Search link -->
+                        <li class="nav-item">
+                            <a class="nav-link active" asp-controller="Admin" asp-action="DonorSearch">
+                                Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Section for showing the admin's name and the logout link -->
+                <div>
+                    <!-- If the AdminName is set in ViewData, display the admin's name -->
+                    @if (ViewData["AdminName"] != null)
+                    {
+                        <span class="text-white me-3">Welcome, @ViewData["AdminName"]!</span>
+                    }
+                    <!-- Logout link -->
+                    <a class="text-white active me-3" asp-controller="Admin" asp-action="Logout">Logout</a>
+                    <!-- me-3 for right side margin -->
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main content area, which will contain the body content of the page -->
+        <main class="flex-grow-1 d-flex flex-column justify-content-center align-items-center">
+            <!-- Render the body content of the page dynamically -->
+            <div>
+                @RenderBody()
+            </div>
+        </main>
+
+        <!-- Footer section -->
+        <footer>
+            <!-- Footer content including the copyright and privacy link -->
+            <p>
+                &copy; 2025 - HelpingHand -
+                <a asp-area="" asp-controller="Home" asp-action="#" class="text-decoration-none text-white" />Privacy
+            </p>
+        </footer>
+
+    </div>
+</body>
+</html>

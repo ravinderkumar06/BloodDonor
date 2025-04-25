@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "../Shared/AdminLayout.cshtml";
+    var donors = ViewBag.Donors as List<BloodDonorProperty>;
+    int currentPage = ViewBag.CurrentPage;
+    int totalPages = ViewBag.TotalPages;
+}
+<head>
+<style>
+    .container {
+        background-color: rgb(0,0,0,0.7);
+        
+    }
+
+</style>
+</head>
+<body>
+<div class="container">
+        <h6 class="text-warning">@TempData["upt"] </h6>
+        <div>
+    @await Html.PartialAsync("DonorResultsPartial",donors)
+</div>
+
+<nav class="nav navbar-light d-flex flex-column justify-content-center align-content-center text-primary">
+    <ul class="pagination">
+        <li class="page-item @(currentPage == 1 ? "disabled" : "")">
+            <a class="page-link" href="?page=@(currentPage - 1)">Previous</a>
+        </li>
+        @for (int i = 1; i <= totalPages; i++)
+        {
+            <li class="page-item @(i == currentPage ? "active" : "")">
+                <a class="page-link" href="?page=@i">@i</a>
+            </li>
+        }
+        <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
+            <a class="page-link" href="?page=@(currentPage + 1)">Next</a>
+        </li>
+    </ul>
+</nav>
+</div>
+
+</body>

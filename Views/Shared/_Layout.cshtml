@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HelpingHand</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Custom Site Styles -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <!-- Additional Styles -->
+    <link rel="stylesheet" href="~/HelpingHand.styles.css" asp-append-version="true" />
+
+    <!-- Inline CSS -->
+    <style>
+        /* Styles the body with a background image and adjusts layout properties */
+        body {
+            margin: 0; /* Removes default margin */
+            padding: 0; /* Removes default padding */
+            height: 100%; /* Ensures full viewport height */
+            overflow: auto; /* Allows scrolling */
+            background-image: url('/Images/bg2.png'); /* Sets the background image */
+            background-repeat: round; /* Ensures the image tiles neatly */
+        }
+
+        /* Class for buttons or elements with unique styling */
+        .M {
+            font-size: 16px; /* Font size */
+            background-color: white; /* White background */
+            color: blue; /* Text color */
+        }
+
+        /* Custom modal content styles */
+        .modal-content {
+            background-color: red; /* Red background for modal content */
+            color: white; /* White text color */
+        }
+
+        /* Footer styles */
+        .footer {
+            text-align: center; /* Centers text horizontally */
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+            color: white; /* White text color */
+            padding: 0; /* No padding inside footer */
+            margin-bottom: 0;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function(){
+
+            $('#').on('click',function(){
+
+
+            });
+
+        });
+
+    </script>
+</head>
+<body>
+    <div class="d-flex flex-column min-vh-100">
+        <!-- Header Section -->
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <!--
+                    - navbar: Styles the navigation bar.
+                    - navbar-expand-lg: Makes the navbar responsive, collapsing for small screens.
+                    - navbar-dark: Adjusts text colors for dark backgrounds.
+                    - bg-dark: Applies a dark background color.
+                -->
+                <ul class="navbar-nav">
+                    <!-- navbar-nav: Groups navigation links -->
+                    <li class="nav-item">
+                        <!-- nav-item: Represents a single navigation item -->
+                        <a class="nav-link active" aria-current="page" asp-action="Index" asp-controller="HomePage">
+                            <!-- nav-link: Styles the anchor tags in the navbar -->
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Register" asp-controller="HomePage"> Register</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <!-- dropdown: Indicates this is a dropdown menu -->
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <!-- dropdown-toggle: Styles the dropdown trigger -->
+                            Login
+                        </a>
+                        <ul class="dropdown-menu bg-light" aria-labelledby="navbarDropdown">
+                            <!-- dropdown-menu: Styles the dropdown items -->
+                            <!-- bg-light: Adds a light background to the dropdown -->
+                            <li><a class="dropdown-item" asp-controller="HomePage" asp-action="AdminLogin"> Admin</a></li>
+                            <li><a class="dropdown-item" asp-controller="HomePage" asp-action="UserLogin"> User</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main role="main" class="d-flex justify-content-center align-items-center flex-grow-1">
+            <!-- 'flex-grow-1' Ensures Main Content Expands to Fill Available Space -->
+            @RenderBody() <!-- This renders the page's content dynamically -->
+        </main>
+
+        <!-- Footer Section -->
+        <footer class="footer">
+            <!--
+                bg-dark: Adds a dark background to the footer.
+                text-white: Ensures all text within the footer is white for contrast against the dark background.
+                text-center: Centers all text horizontally within the footer.
+                py-3: Adds vertical padding (top and bottom) of 1rem (16px) for proper spacing.
+                mt-auto: Automatically pushes the footer to the bottom of the page if used within a flex container layout.
+            -->
+
+            <span>"The gift of blood is the gift of life"</span>
+            <!--
+                Displays a quote as the primary message within the footer.
+            -->
+
+            <a data-bs-toggle="modal" data-bs-target="#quoteModal" class="text-white fw-bold">
+                <!--
+                    data-bs-toggle="modal": Triggers a Bootstrap modal when the link is clicked.
+                    data-bs-target="#quoteModal": Specifies the ID of the modal to open.
+                    text-white: Ensures the link text is white for visibility on the dark background.
+                    fw-bold: Makes the link text bold to stand out.
+                -->
+                .
+                More
+            </a>
+
+            <p class="mb-0">
+                <!--
+                    mb-0: Removes the default bottom margin of the paragraph to maintain compact spacing.
+                -->
+                &copy; 2025 - HelpingHand -
+                <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-decoration-none text-white">
+                    <!--
+                        asp-area: Specifies the Razor area for the link (empty string means the default area).
+                        asp-controller="Home": Indicates the controller this link routes to.
+                        asp-action="Privacy": Indicates the action within the Home controller this link routes to.
+                        text-decoration-none: Removes the underline from the link for a cleaner appearance.
+                        text-white: Ensures the link text is white for visibility on the dark background.
+                    -->
+                    Privacy
+                </a>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Modal for More Details -->
+    <div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel" aria-hidden="true">
+        <!--
+            - modal: Defines a modal (popup) container.
+            - fade: Adds a fade-in animation effect.
+            - tabindex: Makes the modal accessible with the keyboard.
+        -->
+        <div class="modal-dialog">
+            <!-- modal-dialog: Defines the modal's size and layout -->
+            <div class="modal-content">
+                <!-- modal-content: Container for modal content -->
+                <div class="modal-header">
+                    <!-- modal-header: Styles the modal's header section -->
+                    <h5 class="modal-title" id="quoteModalLabel">Blood Donor Quotes</h5>
+                    <button type="button" class="btn-close bg-danger" data-bs-dismiss="modal" aria-label="Close">
+                        <!-- btn-close: Styles a close button -->
+                        <!-- bg-danger: Red background -->
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- modal-body: Main content area of the modal -->
+                    <ul>
+                        <li>Donating blood is a simple yet powerful way to make a significant impact on society.</li>
+                        <li>It can save up to three lives with each donation.</li>
+                        <li>Helps hospitals maintain a steady supply of blood for medical treatments.</li>
+                        <li>Supports patients undergoing surgery, trauma victims, and those with chronic conditions.</li>
+                        <li>Essential for emergency situations and disaster relief efforts.</li>
+                        <li>Promotes a culture of kindness and altruism in the community.</li>
+                        <li>Donating blood fosters unity and encourages individuals to take action for the greater good.</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <!-- modal-footer: Footer section of the modal -->
+                    <button type="button" class="btn btn-secondary bg-dark" data-bs-dismiss="modal">Close</button>
+                    <!-- btn: Base class for buttons -->
+                    <!-- btn-secondary: Secondary button styling -->
+                    <!-- bg-dark: Overrides background to dark -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

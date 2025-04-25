@@ -1,0 +1,63 @@
+﻿@model List<BloodDonorProperty>
+
+<style>
+    .table-striped {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px;
+        background-color: rgb(255, 255, 255,0.8);
+    }
+
+    thead {
+        background-color: black;
+        color: white;
+    }
+    tbody
+    {
+        font-weight:500;
+    }
+</style>
+
+<table class="table table-striped">
+    <thead>
+        <tr><th colspan="10" class="text-center">DONOR LIST</th></tr>
+        <tr>
+            <th>Donor ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Blood Group</th>
+            <th>State</th>
+            <th>City</th>
+            <th>Phone Number</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var donor in Model)
+            {
+                <tr>
+                    <td>@donor.DonorId</td>
+                    <td>@donor.FullName</td>
+                    <td>@donor.Email</td>
+                    <td>@donor.Age</td>
+                    <td>@donor.Gender</td>
+                    <td>@donor.BloodGroup</td>
+                    <td>@donor.State</td>
+                    <td>@donor.City</td>
+                    <td>@donor.PhoneNumber</td>
+                    
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="10" class="text-center">No donors found.</td>
+            </tr>
+        }
+    </tbody>
+</table>

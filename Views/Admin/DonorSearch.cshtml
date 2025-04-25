@@ -1,0 +1,126 @@
+﻿@model BloodDonor.Models.BloodDonorProperty
+@{
+    Layout = "../Shared/AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Handle form submission using AJAX
+        $('#SearchBtn').on('click', function (e) {
+            e.preventDefault();  // Prevent the default form submission behavior
+
+            // Get the form data
+            var formData = {
+                BloodGroup: $('#BloodGroup').val(),
+                Gender: $('#Gender').val(),
+                Age: $('input[name="Age"]').val(),
+                State: $('#State').val(),
+                City: $('#City').val(),
+            };
+
+            // Send the data to the server via AJAX
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("DonorSearch", "Admin")',  // URL to the action
+                data: formData,  // Send form data
+                success: function (response) {
+
+                    // Inject the partial view content into the donorResults div
+                    $('#mydata').html(response.donorTableHtml);
+
+                    // Automatically reset the form after search
+                    $('#BloodGroup').val('');
+                    $('#Gender').val('');
+                    $('input[name="Age"]').val('');
+                    $('#State').val('');
+                    $('#City').empty().append('<option value="">--Select City--</option>');
+                },
+                error: function () {
+                    alert('Error fetching data.');
+                }
+            });
+        });
+
+        // Handle the state change to populate cities dropdown
+        $('#State').on('change', function () {
+            var stateID = $(this).val();
+            if (stateID) {
+                $.get('@Url.Action("GetCities", "HomePage")', { stateID: stateID }, function (data) {
+                    var cityDropdown = $('#City');
+                    cityDropdown.empty().append('<option value="">--Select City--</option>');
+                    $.each(data, function (index, city) {
+                        cityDropdown.append('<option value="' + city.cityName + '">' + city.cityName + '</option>');
+                    });
+                })
+                .fail(function () {
+                    alert('Failed to fetch cities.');
+                });
+            } else {
+                $('#City').empty().append('<option value="">--Select City--</option>');
+            }
+        });
+    });
+</script>
+
+<style>
+    /* Styles for the search form */
+    .SearchForm {
+        background-color: rgba(255, 255, 255, 0.8);
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+<div class="d-flex flex-row">
+    <!-- Donor Search Form -->
+    <form method="post" class="SearchForm">
+        <h3 class="text-center mb-4">Search for Blood Donors</h3>
+
+        <!-- Blood Group -->
+        <div class="form-group">
+            <label for="BloodGroup">Blood Group</label>
+            @Html.DropDownListFor(m => m.BloodGroup, (SelectList)ViewBag.BloodGroups, "--Select Blood Group--", new { @class = "form-control", id = "BloodGroup" })
+        </div>
+
+        <!-- Gender -->
+        <div class="form-group">
+            <label for="Gender">Gender</label>
+            @Html.DropDownList("Gender", new SelectList(new[] { "Male", "Female", "Other" }), "--Select Gender--", new { @class = "form-control" })
+        </div>
+
+        <!-- Age -->
+        <div class="form-group">
+            <label for="Age">Age</label>
+            <input asp-for="Age" class="form-control" type="number" placeholder="Enter Age" />
+        </div>
+
+        <!-- State -->
+        <div class="form-group">
+            <label name="StateID" for="State">State</label>
+            @Html.DropDownListFor(m => m.State, (SelectList)ViewBag.States, "--Select State--", new { @class = "form-control", id = "State" })
+        </div>
+
+        <!-- City -->
+        <div class="form-group">
+            <label for="City">City</label>
+            <select id="City" asp-for="City" class="form-control">
+                <option value="">--Select City--</option>
+            </select>
+        </div>
+
+        <!-- Search Button -->
+        <div class="text-center">
+            <button type="submit" id="SearchBtn" class="btn btn-primary btn-lg btn-block">Search</button>
+        </div>
+    </form>
+
+    <!-- Container for Donor Results -->
+    <div id="mydata">
+        <!-- Donor results will be dynamically injected here -->
+    </div>
+</div>

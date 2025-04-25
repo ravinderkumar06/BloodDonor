@@ -1,0 +1,45 @@
+﻿@model List<BloodDonor.Models.BloodDonorProperty>
+
+
+<div class="d-flex justify-content-end">
+    <a class="btn btn-success btn-sm text-white" href="@Url.Action("Register", "Admin")">Create Donor</a>
+</div>
+<table class="table table-light">
+    <thead>
+        <tr>     <th class="text-center" colspan="10">DONOR LIST</th></tr>
+        <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Blood Group</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>State</th>
+            <th>City</th>
+            <th>Phone Number</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model !=null && Model.Any())
+        {
+            @foreach (var donor in Model)
+            {
+                <tr>
+                    <td>@donor.FullName</td>
+                    <td>@donor.Email</td>
+                    <td>@donor.BloodGroup</td>
+                    <td>@donor.Age</td>
+                    <td>@donor.Gender</td>
+                    <td>@donor.State</td>
+                    <td>@donor.City</td>
+                    <td>@donor.PhoneNumber</td>
+                    <td>
+                        @Html.ActionLink("Edit","Register","Admin",new{id=donor.DonorId},new{@class="btn btn-primary btn-sm"}) |
+                        @Html.ActionLink("Delete", "Delete", "Admin", new { id = donor.DonorId }, new { Onclick = "return confirm('Are sure wants to delete?');", @class = "btn btn-danger btn-sm" })
+                    </td>
+                    
+                </tr>
+            }
+        }
+    </tbody>
+</table>

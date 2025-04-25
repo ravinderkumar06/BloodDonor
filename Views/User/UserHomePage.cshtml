@@ -1,0 +1,30 @@
+﻿
+@{
+    Layout = "../Shared/UserLayout.cshtml";
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UserHomePage</title>
+</head>
+<body>
+    <div class="container">
+        <div class="bg-transparent text-white">
+            <h1>
+                Welcome to Donor Homepage Mr/Miss @if (ViewData["AdminName"] != null)
+                {
+                    <span class="text-white me-3"> @ViewData["AdminName"] !</span>
+                }
+            </h1>
+            <p>We are here to assist you in making your profile, check out the details, or search</p>
+        </div>
+
+      
+    </div>
+
+</body>
+</html>

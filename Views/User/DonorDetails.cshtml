@@ -1,0 +1,53 @@
+﻿@model List<BloodDonor.Models.BloodDonorProperty>
+
+    <style>
+        table{
+
+           
+        }
+    </style>
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered text-white">
+        <thead>
+            <tr>
+                <th>Donor ID</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Blood Group</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Phone Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var donor in Model)
+            {
+                <tr>
+                    <td>@donor.DonorId</td>
+                    <td>@donor.FullName</td>
+                    <td>@donor.Email</td>
+                    <td>@donor.Age</td>
+                    <td>@donor.Gender</td>
+                    <td>@donor.BloodGroup</td>
+                    <td>@donor.State</td>
+                    <td>@donor.City</td>
+                    <td>@donor.PhoneNumber</td>
+                    <td>
+                        <a href="@Url.Action("Upadate_User", "User", new { id = donor.DonorId})" class="btn btn-primary btn-sm">
+                            Edit
+                        </a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No donor found with the given ID.</p>
+}

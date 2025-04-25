@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <!-- Bootstrap JS -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <style>
+        body{
+            background-image: url('/Images/bg6.jpg');
+           background-repeat:repeat;
+            background-repeat: no-repeat;
+            background-size: cover; /* Sets width and height to 100% */
+           
+        }
+    </style>
+ 
+</head>
+<body>
+    <div class="d-flex flex-column min-vh-100">
+
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-between">
+                <div>
+                    <!--
+                        - navbar: Styles the navigation bar.
+                        - navbar-expand-lg: Makes the navbar responsive, collapsing for small screens.
+                        - navbar-dark: Adjusts text colors for dark backgrounds.
+                        - bg-dark: Applies a dark background color.
+                    -->
+                    <ul class="navbar-nav">
+                        <!-- navbar-nav: Groups navigation links -->
+                        <li class="nav-item">
+                            <!-- nav-item: Represents a single navigation item -->
+                            <a class="nav-link active" aria-current="page" asp-action="UserHomePage" asp-controller="User">
+                                <!-- nav-link: Styles the anchor tags in the navbar -->
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="User" asp-action="DetailsOfUser">Details</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="User" asp-action="Search">
+                                Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-flex align-items-center">
+                    @if (ViewData["AdminName"] != null)
+                    {
+                        <span class="text-white me-3">Welcome, @ViewData["AdminName"]!</span>
+                    }
+                    <a class="nav-link active text-white" asp-controller="Admin" asp-action="Logout">Logout</a>
+                </div>
+            </nav>
+        </header>
+        <main class="flex-grow-1">
+            <div>
+                @RenderBody()
+            </div>
+        </main>
+        <footer class="d-flex justify-content-center align-items-center bg-dark text-white">
+            <p>
+                &copy; 2025 - HelpingHand -
+                <a asp-area="" asp-controller="Home" asp-action="#" class="text-decoration-none text-white" />Privacy
+            </p>
+        </footer>
+
+    </div>
+</body>
+</html>

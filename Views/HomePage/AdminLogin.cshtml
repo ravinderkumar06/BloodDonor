@@ -1,0 +1,87 @@
+﻿@model BloodDonor.Models.LoginProperties
+<html>
+<head>
+    <title>Admin/Adminlogin</title>
+    <!-- Link to Bootstrap CSS to style the form and components -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        /* CSS to style the login form */
+        .login-form-container {
+            background-color: rgba(255, 255, 255, 0.5); /* White background with slight transparency */
+            max-width: 500px; /* Maximum width of form */
+            margin: auto; /* Centers the form horizontally */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow around the form */
+            padding: 20px; /* Adds spacing inside the form */
+        }
+
+        /* Spacing between form fields */
+        .form-group {
+            margin-bottom: 20px; /* Adds space between fields */
+        }
+
+        /* Button full-width and larger font size */
+        .btn-primary {
+            width: 100%; /* Full-width button */
+            font-size: 18px; /* Larger text for the button */
+        }
+        /* CSS for error messages (alert box) */
+        .alert-danger {
+            margin-top: 20px; /* Adds space above the error message */
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container mt-5">
+        <!--
+        container: Centers the content with a predefined width that adapts to screen sizes.
+        mt-5: Adds top margin (3rem) to push the form down from the top edge.
+        -->
+        <div class="login-form-container">
+            <!-- Form structure starts here -->
+            <form asp-action="AdminLogin" asp-controller="HomePage" method="post">
+                <!-- Heading of the form -->
+                <div class="bg-warning text-center">
+                    <h2>Admin Login</h2>
+                </div>
+
+                <!-- Main content of the form -->
+                <div class="d-flex flex-column justify-content-center align-items-center">
+
+                    <!-- Username input field -->
+                    <div class="form-group">
+                        <label for="username">Username</label>: <!-- Label for the username input -->
+                        <input asp-for="Email" type="text" class="form-control" id="username" required /> <!-- Text input for the username, bound to the "Email" property in the model -->
+                    </div>
+
+                    <!-- Password input field -->
+                    <div class="form-group">
+                        <label for="password">Password</label>: <!-- Label for the password input -->
+                        <input asp-for="Password" type="password" class="form-control" id="password" required /> <!-- Password input for the password, bound to the "Password" property in the model -->
+                    </div>
+
+                    <!-- Submit button -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Login</button> <!-- Button to submit the form, styled with Bootstrap's "btn-primary" class -->
+                    </div>
+                </div>
+
+                <!-- Error message alert (if any) styled with Bootstrap -->
+                @if (ViewBag.ErrorMessage != null)
+                {
+                    <div class="alert alert-danger mt-3">
+                        <!--alert: Creates a Bootstrap-styled alert box.
+                        alert-danger: Applies a red background for error messages.
+                        mt-3: Adds top margin (1rem) to space out the alert from the form.
+                        -->
+                        @ViewBag.ErrorMessage <!-- Display dynamic error message -->
+                    </div>
+                }
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

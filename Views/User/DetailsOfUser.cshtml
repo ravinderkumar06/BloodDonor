@@ -1,0 +1,93 @@
+﻿
+@{
+    Layout = "../Shared/UserLayout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DetailsOfUser</title>
+    <style>
+        .formcss{
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            background-color:rgb(0,0,0,0.9);
+            color:white;
+            margin:25px;
+        }
+
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+             
+            $("#searchButton").on('click',function(){
+            
+                var donorId=$("#donorId").val();
+
+
+                if(donorId)
+                {
+                    $.ajax(
+                        {
+                            url:"/User/DetailsOfUser",
+                            type:"POST",
+                            data:{ donorId: donorId },
+
+                            success:function(result)
+                            {
+                                
+                                $('#donor').html(result);
+                            },
+                            error:function()
+                            {
+                                alert('An error occurred while fetching donor details.');
+                            }
+
+                        }
+                    );
+                }
+                else
+                {
+                    alert('Please enter a valid donor id.');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    @if(ViewBag.upt!=null)
+    {
+
+    }
+    <div class="container">
+        <div class="container formcss">
+        <form style="margin:25px">
+            <fieldset>
+                <legend class="text-white">Searching Form</legend>
+            <div class="row">
+
+                <div class="col-3">
+                    <label>DonorID</label>
+                </div>
+                <div class="col-6">
+                    <input type="text" id="donorId" placeholder="Enter Donor id" />
+                </div>
+                <div class="col-3">
+                  <button type="button" id="searchButton">Search</button>
+                </div>
+            </div>
+            </fieldset>
+        </form>
+            <div id="donor">
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+</html>
