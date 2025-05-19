@@ -1,0 +1,36 @@
+# Blood Group Management System 🩸
+
+A web application built using **ASP.NET Core MVC**, **EF6**, **Bootstrap**, **jQuery**, and **SQL Server** to manage blood donor information efficiently.
+
+---
+
+## 🔧 Technologies Used
+
+- ASP.NET Core MVC
+- Entity Framework 6 (Database-First)
+- jQuery & AJAX
+- Bootstrap
+- SQL Server
+
+---
+
+## ✨ Features
+
+- Add, update, delete, and view blood donors
+- Responsive UI using Bootstrap
+- AJAX used for seamless asynchronous requests
+- Stored procedures for database operations
+
+---
+
+## 📸 Screenshots
+
+*(Add images in next step)*
+
+---
+
+## 🚀 How to Run This Project
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ravinderkumar06/BloodDonor.git
